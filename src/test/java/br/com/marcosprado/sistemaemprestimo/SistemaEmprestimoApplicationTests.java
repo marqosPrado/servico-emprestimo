@@ -81,4 +81,17 @@ class SistemaEmprestimoApplicationTests {
         List<Loan> loans = loanService.checkEligibility(customer);
         assertEquals(LoanType.CONSIGNMENT, loans.get(1).getLoanType());
     }
+
+    @Test
+    void needReturnAGuaranteedLoanWhenIncomeIsBetweenThreeAndFiveThousandAndCustomerIsUnderThirtyAndLocationIsSP() {
+        Customer customer = new Customer(
+                29,
+                "259.985.547-14",
+                "Marcos",
+                4000.00,
+                "SP"
+        );
+        List<Loan> loans = loanService.checkEligibility(customer);
+        assertEquals(LoanType.GUARANTEED, loans.get(2).getLoanType());
+    }
 }
